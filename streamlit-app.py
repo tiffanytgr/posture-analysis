@@ -24,7 +24,7 @@ warnings.filterwarnings("ignore")
 
 
 # default demo video 
-DEMO_VIDEO = 'good-video-9.mp4'
+DEMO_VIDEO = 'images/good-video-9.mp4'
 
 
 #mediapipe inbuilt solutions 
@@ -103,8 +103,7 @@ def main():
     pose = mp_pose.Pose()
     class_name='Good'
 
-    # st.sidebar.text('Input Video')
-    # st.sidebar.video(tfflie.name)
+
 
     drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)
 
