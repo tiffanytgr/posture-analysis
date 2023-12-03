@@ -32,6 +32,7 @@ This project aims to empower individuals to improve their running / walking post
   <img src="images/mediapipe-points.png" style="height:300px" >
 
 ## Conclusion:
+#### Link to Streamlit app: [Click Here](https://posture-analysis-app.streamlit.app/) 
 #### Link to Streamlit app repo: [Click Here](https://github.com/tiffanytgr/posture-analysis-app) 
 #### Example output of app deployed on streamlit:<br>
 ![Demo](images/streamlit-app-demo.gif)
