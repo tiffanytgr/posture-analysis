@@ -23,6 +23,7 @@ warnings.filterwarnings("ignore")
 
 
 
+
 # default demo video 
 DEMO_VIDEO = 'images/good-video-9.mp4'
 
@@ -65,9 +66,7 @@ def main():
     
     url = 'https://github.com/tiffanytgr/posture-analysis-app/tree/main'
     st.sidebar.markdown(f'''<a href={url}><button style="background-color:Grey;">Link to Github Code</button></a>''',unsafe_allow_html=True)
-    #model selection 
-    # model_selection = st.sidebar.selectbox('Model Selection',options=[0,1,2])
-    # st.markdown(' ## Output')
+
     stframe = st.empty()
     
     #file uploader
@@ -81,6 +80,7 @@ def main():
 
         if use_webcam:
             vid = cv2.VideoCapture(0)
+
         else:
             vid = cv2.VideoCapture(DEMO_VIDEO)
             tfflie.name = DEMO_VIDEO
@@ -103,7 +103,8 @@ def main():
     pose = mp_pose.Pose()
     class_name='Good'
 
-
+    # st.sidebar.text('Input Video')
+    # st.sidebar.video(tfflie.name)
 
     drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)
 
@@ -123,7 +124,10 @@ def main():
         
         end_time = time.time()+60
         while time.time() < end_time:
-            vid = cv2.VideoCapture(tfflie.name)
+            if use_webcam:
+                vid = cv2.VideoCapture(0)
+            else:
+                vid = cv2.VideoCapture(tfflie.name)
 
             width = 640
             height = 480
@@ -197,12 +201,12 @@ def main():
                     neck_inclination = "Neck Inclination (Ear-Shoulder Angle):" + str(round(neck_inclination,2))
                     
                     # font
-                    font = ImageFont.truetype(font = "C:/Windows/Fonts/Arial.ttf", size = font_size)
-                    # font = ImageFont.truetype(font = "Arial Unicode.ttf", size = font_size)
+                    # font = ImageFont.truetype(font = "C:/Windows/Fonts/Arial.ttf", size = font_size)
+                    font = ImageFont.truetype(font = "Arial-Unicode.ttf", size = font_size)
                     
                     # draw text
                     draw.text((20,0), torso_angle, font = font, fill = 'black')
-                   
+                    # print(font_size)
                     temp=0
                     image = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
                     temp=temp+font_size+7
@@ -290,9 +294,9 @@ def main():
                         ss=font_size+27
                     else:
                         ss=int(font_size/10)+42+font_size
-                 
-                    font = ImageFont.truetype("C:/Windows/Fonts/Arial.ttf", ss)
-                    # font = ImageFont.truetype("Arial Unicode.ttf", ss)
+                    
+                    
+                    font = ImageFont.truetype("Arial-Unicode.ttf", ss)
                     bbox = draw.textbbox((20,temp), print_ans, font = font)
                     draw.rectangle(bbox, fill = 'black')
                     draw.text((20,temp), print_ans, font = font, fill = 'white')
@@ -302,7 +306,6 @@ def main():
                     pass
 
                 stframe.image(image,use_column_width=True)
-
 
             vid.release()
             out.release()
